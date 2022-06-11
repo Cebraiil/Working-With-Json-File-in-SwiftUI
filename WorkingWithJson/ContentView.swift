@@ -2,15 +2,24 @@
 //  ContentView.swift
 //  WorkingWithJson
 //
-//  Created by Abdul Adl on 11.06.2022.
-//
 
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var datas = ReadData()
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            VStack {
+                List {
+                    ForEach(datas.languages) { item in
+                        NavigationLink(destination: LanguageDetail(language: item)) {
+                            Text(item.name)
+                        }
+                    }
+                }
+                .listStyle(.grouped)
+            }
+        }
     }
 }
 
